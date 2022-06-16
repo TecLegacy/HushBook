@@ -10,3 +10,4 @@ app.listen(port, () => {
 app.use('/kesh', (req, res) => {
   res.send('its working');
 });
+app.use('/secrete/hush', require('./routes/secreteRoutes'));
