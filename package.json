@@ -1,0 +1,22 @@
+{
+  "name": "mern-from-travsey-meadia-goal-setter-app",
+  "version": "1.0.0",
+  "description": "secrete keeper",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
+  },
+  "author": "keshav",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.3.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
