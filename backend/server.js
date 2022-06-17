@@ -1,8 +1,10 @@
 //The sequence of each method should be same as below.
 
 const express = require('express');
+const connectDB = require('./config database/db');
 const { expressErrorHandler } = require('./middleware/expressErrorHandler');
 const dotenv = require('dotenv').config();
+const color = require('colors');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -21,3 +23,6 @@ app.use('/secrete/hush', require('./routes/secreteRoutes'));
 
 //Middleware for ExpressErrorHandle
 app.use(expressErrorHandler);
+
+//connection to mongodb atlas
+connectDB();
