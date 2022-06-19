@@ -18,6 +18,7 @@ router.post('/', post);
 //@routes put->secrete/hush/ID
 //@acces Private
 router.put('/:id', put);
+
 //@description delete hush
 //@routes delete->secrete/hush/ID
 //@acces Private

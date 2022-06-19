@@ -6,6 +6,9 @@ const { expressErrorHandler } = require('./middleware/expressErrorHandler');
 const dotenv = require('dotenv').config();
 const color = require('colors');
 
+//connection to mongodb atlas
+connectDB();
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -23,6 +26,3 @@ app.use('/secrete/hush', require('./routes/secreteRoutes'));
 
 //Middleware for ExpressErrorHandle
 app.use(expressErrorHandler);
-
-//connection to mongodb atlas
-connectDB();
