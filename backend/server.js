@@ -19,10 +19,14 @@ app.listen(port, () => {
 
 //Body parse and urlencoded-false @express
 app.use(express.json());
+//char to ASCII-false
 app.use(express.urlencoded({ extended: false }));
 
-//Define routes for hush
+//Defined routes for hush
 app.use('/secrete/hush', require('./routes/secreteRoutes'));
+
+//Defined routes for user
+app.use('/secrete/users', require('./routes/userRoutes'));
 
 //Middleware for ExpressErrorHandle
 app.use(expressErrorHandler);

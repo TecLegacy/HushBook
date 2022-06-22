@@ -1,11 +1,13 @@
 const Secretes = require('../models/secreteKeeper');
 const express = require('express');
-const expressAsyncHandler = require('express-async-handler');
+
+//To handle exception in middleware
+const asyncHandler = require('express-async-handler');
 
 //@descption Get hush
 //@routes Get/secrete/hush
 //@access private
-const get = expressAsyncHandler(async (req, res) => {
+const get = asyncHandler(async (req, res) => {
   // res.status(400).json({
   // message: 'Getting all Secretes  😊',
   // });
@@ -18,7 +20,7 @@ const get = expressAsyncHandler(async (req, res) => {
 //@descption Create hush
 //@routes POST/secrete/hush
 //@access private
-const post = expressAsyncHandler(async (req, res) => {
+const post = asyncHandler(async (req, res) => {
   //res.status(200).json({
   //  message: 'Creating Hush! 😎',
   //   text: data,
@@ -40,7 +42,7 @@ const post = expressAsyncHandler(async (req, res) => {
 //@descption update hush
 //@routes PUT/secrete/hush/:Id
 //@access private
-const put = expressAsyncHandler(async (req, res) => {
+const put = asyncHandler(async (req, res) => {
   // res.status(200).json({
   //   message: 'Making Changes to Hush 😇',
   // });
@@ -56,7 +58,7 @@ const put = expressAsyncHandler(async (req, res) => {
 //@descption delete hush
 //@routes Delete/secrete/hush/:ID
 //@access private
-const remove = expressAsyncHandler(async (req, res) => {
+const remove = asyncHandler(async (req, res) => {
   // res.status(200).json({
   //   message: 'Deleting all Hush 😔',
   // });
