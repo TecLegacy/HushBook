@@ -13,7 +13,8 @@ const get = asyncHandler(async (req, res) => {
   // });
 
   //#getting secretes from mongoDB
-  const secretes = await Secretes.find();
+  //req.user.id is set through middleware
+  const secretes = await Secretes.find({ user: req.user.id });
   res.status(200).json(secretes);
 });
 
@@ -35,6 +36,7 @@ const post = asyncHandler(async (req, res) => {
   //#Creating Secretes in mongoDB
   const createSecretes = await Secretes.create({
     text: req.body.text,
+    user: req.user.id,
   });
   res.status(200).json(createSecretes);
 });
@@ -47,10 +49,29 @@ const put = asyncHandler(async (req, res) => {
   //   message: 'Making Changes to Hush 😇',
   // });
 
+  const secrete = await Secretes.findById(req.params.id);
+
+  if (!secrete) {
+    res.status(400);
+    throw new Error('Hush not found');
+  }
+
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error('User not found');
+  }
+
+  // Make sure the logged in user matches the goal user
+  if (secrete.user.toString() !== req.user.id) {
+    res.status(401);
+    throw new Error('User not authorized');
+  }
+
   //#Getting User ID and updating Secretes
   const ID = req.params.id;
-  const updateSecretes = await Secretes.findByIdAndUpdate(ID, {
-    text: req.body.text, //updated Secretes
+  const updateSecretes = await Secretes.findByIdAndUpdate(ID, req.body, {
+    new: true,
   });
   res.status(200).json(updateSecretes);
 });
@@ -63,9 +84,28 @@ const remove = asyncHandler(async (req, res) => {
   //   message: 'Deleting all Hush 😔',
   // });
 
+  const secrete = await Secretes.findById(req.params.id);
+
+  if (!secrete) {
+    res.status(400);
+    throw new Error('Hush not found');
+  }
+
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error('User not found');
+  }
+
+  // Make sure the logged in user matches the goal user
+  if (secrete.user.toString() !== req.user.id) {
+    res.status(401);
+    throw new Error('User not authorized');
+  }
+
   //# remove Secretes by id
-  const remove = await Secretes.findById(req.params.id);
-  await remove.remove();
+  await secrete.remove();
+
   res.status(200).json({
     id: req.params.id,
   });

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('../models/userModel');
+
 const secreteKeeper = mongoose.Schema(
   {
     //config relationship between User and Hush
